@@ -1,0 +1,10 @@
+flask
+flask_cors
+werkzeug
+sumy
+python-docx
+PyPDF2
+spacy
+pattern
+nltk
+pandas

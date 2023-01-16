@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Corpus Base Chatbot</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+</head>
+
+<body id="htmlbody">
+    <p id="title">Welcome To Chatbot Conversation!</p>
+    <div id="container">
+        <div id="message">
+            <table id="mymessage">
+                <tr>
+                    <th colspan="2" width="100%"></th>
+                    <th width="100%"></th>
+                </tr>
+                <tr>
+                    <td id="h11">Hello! How can i help you with the paper?</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <hr style="height:1px;border:0;color:black;background-color:black;margin: 0;padding: 0;">
+        <div id="InputDiv">
+            <input id="input" type="text" name="message" placeholder="Enter Message!">
+            <a id="btn" onclick="userMessage()">Send</a>
+
+        </div>
+    </div>
+    <style>
+        body {
+            text-align: center;
+            background-color: #5C5C5C;
+        }
+
+        #h12 {
+            font-size: medium;
+            padding: 10px;
+            background-color: #B4DEC5;
+            width: fit-content;
+            border-radius: 10px;
+            float: right;
+        }
+
+        #mymessage {
+            padding: 10px;
+            width: 100%;
+        }
+        
+        #h11 {
+            padding: 10px;
+            font-size: medium;
+            width: 60%;
+            border-radius: 10px;
+            background-color: #B4B9DE;
+            text-align: left;
+        }
+
+        #input {
+            width: 86%;
+            border-radius: 0px 0px 0px 10px;
+            padding: 1%;
+            height: 4vh;
+            border-width: 0px 1px 0 0;
+        }
+
+        #input:focus,
+        input:focus {
+            outline: none;
+        }
+
+        #btn {
+            border-radius: 0px 0px 10px 0px;
+            height: 4vh;
+            cursor: pointer;
+            border: black;
+            color: rgb(130, 7, 7);
+        }
+
+
+        #container {
+            margin-top: -3%;
+            background-color: white;
+            border-radius: 10px;
+            margin-left: 30%;
+            margin-right: 30%;
+        }
+
+        #message {
+            margin-top: 15%;
+            height: 400px;
+            overflow-y: scroll;
+
+        }
+
+        #message::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        #title {
+            font-size: xx-large;
+            font-weight: bold;
+            color: white;
+        }
+      
+
+        @media only screen and (max-width: 850px) {
+            #container {
+                margin-left: 20%;
+                margin-right: 20%;
+            }
+        }
+
+        @media only screen and (max-width: 550px) {
+            #input {
+                width: 80%;
+            }
+        }
+
+        @media only screen and (max-width: 360px) {
+            #input {
+                width: 73%;
+            }
+        }
+    </style>
+    <script>
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("btn").click();
+            }
+        });
+        function userMessage() {
+            let myphase = document.querySelector("#convophase");
+            let userInput = document.querySelector("#input");
+            let message = document.querySelector("#message");
+            let mymessage = document.querySelector("#mymessage");
+            if (userInput.value != "") {
+                let table = document.getElementById("mymessage");
+                let row = table.insertRow(-1);
+                let c1 = row.insertCell(0);
+                let c2 = row.insertCell(1);
+                c1.innerText = ""
+                c2.innerText = userInput.value
+                c2.setAttribute("id", "h12")
+                $.ajax({
+                    url: "http://127.0.0.1:5000/response",
+                    method: "post",
+                    data: { usermessage: userInput.value},
+                    success: function (reply) {
+                        let table = document.getElementById("mymessage");
+                        let row = table.insertRow(-1);
+                        let c1 = row.insertCell(0);
+                        let c2 = row.insertCell(1);
+                        c1.innerText = reply
+                        c2.innerText = ""
+                        c1.setAttribute("id", "h11")
+                        userInput.value = ""
+                        var objDiv = document.getElementById("message");
+                        objDiv.scrollTop = objDiv.scrollHeight;
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("errorThrown");
+                    }
+                })
+
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>

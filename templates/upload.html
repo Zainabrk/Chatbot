@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Corpus Base Chatbot</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <form id="container1" action="http://localhost:5000/chosecsv" method="POST" enctype="multipart/form-data">
+        <label id="uploadfile" widht="200px">
+            <input id="Files" name="file" type="file" accept=".pdf, .docx" />
+            Chose Paper
+        </label>
+        <br>
+        <input id="submitfile" type=submit value=Submit onclick="UploadFile()">
+    </form>
+    <style>
+        input[type="file"] {
+            display: none;
+        }
+
+        body {
+            text-align: center;
+            background-color: #a0a0a0;
+            margin-top: 5%;
+        }
+
+        #container1 {
+            background-color: white;
+            border-radius: 10px;
+            height: 75vh;
+            margin-left: 30%;
+            margin-right: 30%;
+            position: relative;
+        }
+
+
+        #container1 #uploadfile {
+            position: relative;
+            top: 40%;
+            color: rgb(255, 255, 255);
+            background-color: #727272;
+            border-radius: 10px;
+            padding: 2% 6% 2% 6%;
+            cursor: pointer;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        #container1 #submitfile {
+            position: relative;
+            top: 45%;
+            color: rgb(255, 255, 255);
+            background-color: #3d4ddc;
+            border-color: transparent;
+            border-radius: 10px;
+            padding: 2% 6% 2% 6%;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+    </style>
+    <script>
+        function UploadFile() {
+            var ins = document.getElementById('Files').files.length;
+            if (ins === 0) {
+                alert("No File Selected")
+            }
+            else {
+                alert(file + " file uploaded successfully")
+            }
+        }
+    </script>
+
+</body>
+
+</html>
