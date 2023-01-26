@@ -8,3 +8,4 @@ spacy
 pattern
 nltk
 pandas
+pycountry
