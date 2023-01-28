@@ -247,6 +247,33 @@ def problemdiscuss(text):
     problem = abstract(text)
     return summary(problem)
 
+def conclusion(text):
+  tokens=nltk.word_tokenize(text)
+  word_counts = Counter(tokens)
+  if(word_counts['conclusion']>1):
+    while(word_counts['conclusion']!=1):
+      tokens.remove("conclusion")
+      word_counts = Counter(tokens)
+  text=" ".join(tokens)
+  if ("conclusion" in text):
+    idx1 = text.index("conclusion")
+    if ("references" in text):
+      idx2 = text.index("references") 
+    elif("reference" in text):
+      idx2 = text.index("reference") 
+    else:
+      idx2 = idx1+1000
+    future=''
+    for idx in range(idx1+len("conclusion")+1, idx2):
+      future = future + text[idx]
+    while(text[idx2]!='.'):
+      future = future + text[idx2]
+      idx2+=1
+    return future
+  else:
+    
+    return 'NOT FOUND'
+
 def futurework(text):
   if ("future work" in text):
     idx1 = text.index("future work")
@@ -326,17 +353,17 @@ def getText(filename):
     dataframe = dataframe.append(newrow, ignore_index=True)
     newrow = {"Questions":"what is the future work","Answers":futurework(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
-    newrow = {"Questions":"what techniques has been discussed in paper","Answers":techniques(text)}
+    newrow = {"Questions":"what techniques has been discussed","Answers":techniques(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
-    newrow = {"Questions":"what technologies has been discussed in paper","Answers":techniques(text)}
+    newrow = {"Questions":"what approaches has been discussed","Answers":techniques(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
-    newrow = {"Questions":"what approaches has been discussed in paper","Answers":techniques(text)}
-    dataframe = dataframe.append(newrow, ignore_index=True)
-    newrow = {"Questions":"what tools has been suggested in paper","Answers":tools(text)}
+    newrow = {"Questions":"what tools has been suggested","Answers":tools(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
     newrow = {"Questions":"what is the problem statement","Answers":problem(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
-    newrow = {"Questions":"what is the problem discussed in the paper","Answers":problemdiscuss(text)}
+    newrow = {"Questions":"what is the problem discussed","Answers":problemdiscuss(text)}
+    dataframe = dataframe.append(newrow, ignore_index=True)
+    newrow = {"Questions":"what is the conclusion","Answers":conclusion(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
     occurence,talking=talkabout(text)
     newrow = {"Questions":"what is the paper talking about","Answers":talking}
@@ -409,11 +436,5 @@ def get_chatbotReply(question):
     #Training the chabot using chat library with the pairs we made from the rules given and the reflections
     chat = Chat(pairs, reflections)
     #Getting one to one response in present it in rules then will give answer
-    answer = chat.respond(question)
     #Will calculate cosine similarity with all questions and gives answer of the closest question if one to one question doesn't found
-    if answer == None:
-        return Chat_Bot_Answer(question,Chat_Bot_Responses)
-    else:
-        return answer
-
-getText("2206.04659.pdf")
+    return Chat_Bot_Answer(question,Chat_Bot_Responses)
