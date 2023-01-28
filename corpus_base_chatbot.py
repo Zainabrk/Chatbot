@@ -72,7 +72,7 @@ def abstract(text):
   return abstract
 
 def talkabout(text):
-  notneeded=["scope","research","outlook","techniques","technique","directions","direction","location" ,"author","talks","talk","whose","abstract","summary","talking","problem","statement","tools","tool","technologies","technology","approaches","approach","future","work","works"]
+  notneeded=["technological","located","scope","research","outlook","techniques","technique","directions","direction","location" ,"author","talks","talk","whose","abstract","summary","talking","problem","statement","tools","tool","technologies","technology","approaches","approach","future","work","works"]
   data = text.translate(str.maketrans('', '', string.punctuation))
   data = data.split() 
   data = list(set(data) - set(notneeded))
@@ -346,6 +346,8 @@ def getText(filename):
     dataframe = dataframe.append(newrow, ignore_index=True)
     newrow = {"Questions":"what is the location of author","Answers":authorlocation(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
+    newrow = {"Questions":"what is the author location","Answers":authorlocation(text)}
+    dataframe = dataframe.append(newrow, ignore_index=True)
     text = text.lower()
     newrow = {"Questions":"what is the summary","Answers":summary(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
@@ -354,6 +356,8 @@ def getText(filename):
     newrow = {"Questions":"what is the future work","Answers":futurework(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
     newrow = {"Questions":"what techniques has been discussed","Answers":techniques(text)}
+    dataframe = dataframe.append(newrow, ignore_index=True)
+    newrow = {"Questions":"what technologies has been discussed","Answers":techniques(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
     newrow = {"Questions":"what approaches has been discussed","Answers":techniques(text)}
     dataframe = dataframe.append(newrow, ignore_index=True)
