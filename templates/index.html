@@ -147,7 +147,7 @@
                 c2.innerText = userInput.value
                 c2.setAttribute("id", "h12")
                 $.ajax({
-                    url: "http://127.0.0.1:5000/response",
+                    url: "http://127.0.0.1:3000/response",
                     method: "post",
                     data: { usermessage: userInput.value},
                     success: function (reply) {

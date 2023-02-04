@@ -27,11 +27,11 @@ def upload():
 def chosecsv():
     file = request.files['file']
     if file.filename == '':
-        return redirect("/")
+        return "Fail"
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     chats.getText(filename)
-    return redirect("/index")
+    return "Success"
 
 @app.route('/response',methods=["POST"])
 def get_response():
@@ -42,4 +42,4 @@ def get_response():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,port=3000)

@@ -204,7 +204,7 @@ def problem(text):
     future=''
     for idx in range(idx1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return future
@@ -214,7 +214,7 @@ def problem(text):
     future=''
     for idx in range(idx1+len("introduction")+1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return summary(future)
@@ -229,7 +229,7 @@ def problemdiscuss(text):
     future=''
     for idx in range(idx1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return future
@@ -239,7 +239,7 @@ def problemdiscuss(text):
     future=''
     for idx in range(idx1+len("conclusion")+1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return summary(future)
@@ -266,7 +266,7 @@ def conclusion(text):
     future=''
     for idx in range(idx1+len("conclusion")+1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return future
@@ -281,7 +281,7 @@ def futurework(text):
     future=''
     for idx in range(idx1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return future 
@@ -291,7 +291,7 @@ def futurework(text):
     future=''
     for idx in range(idx1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return future
@@ -301,7 +301,7 @@ def futurework(text):
     future=''
     for idx in range(idx1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return future
@@ -311,7 +311,7 @@ def futurework(text):
     future=''
     for idx in range(idx1, idx2):
       future = future + text[idx]
-    while(text[idx2]!='.'):
+    while(idx2<len(text) and text[idx2]!='.' ):
       future = future + text[idx2]
       idx2+=1
     return future
