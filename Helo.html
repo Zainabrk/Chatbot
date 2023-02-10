@@ -10,6 +10,7 @@
     <body>
         <br>
         <br>
+        <!-- Choosing the paper and submitting it to the flask api for building the rules -->
         <div id="myform">
             <label id="uploadfile" widht="200px">
                 <input id="Files" name="file" type="file" accept=".pdf, .docx"/>
@@ -20,6 +21,7 @@
             <br>
             <input id="submitfile" type="submit" value="Submit" onclick="UploadFile()">
         </div>
+        <!-- Chatbot interface showing chatbot replies on the left and users message on the right while getting user response from the bottom of the div -->
         <div id="container">
             <div id="message">
                 <table id="mymessage">
@@ -40,7 +42,9 @@
 
             </div>
         </div>
+        <!-- Floating button that shows option of chosing paper when clicked and initiate chat -->
         <button id="chatbot" style="position:fixed;right:1%;bottom:1%;" onclick="Chatbot()">Chatbot</button>
+        <!-- In Line Styles For Web Page -->
         <style>
             #h12 {
                 font-size: medium;
@@ -153,6 +157,7 @@
             }
         </style>
         <script>
+            // Function caling flask api when click on the submit button and file is send in the API to flask
             $(function () {
                 $('#submitfile').click(function () {
                     const formData = new FormData();
@@ -171,10 +176,12 @@
                     });
                 });
             });
+            // Fuction initiate chat by when click on the chatbot floating button
             function Chatbot() {
                 var ins = document.getElementById('myform');
                 ins.style.visibility = "visible"
             }
+            // Fuction Checking if a file is uploaded before submitting if not then it wil show a alert
             function UploadFile() {
                 var ins = document.getElementById('Files').files.length;
                 if (ins === 0) {
@@ -182,12 +189,15 @@
                 }
 
             }
+            // Checking whether enter is pressed while getting response from the user and if yes then call user message function by activating
+            // on click function on element with btn id 
             input.addEventListener("keypress", function (event) {
                 if (event.key === "Enter") {
                     event.preventDefault();
                     document.getElementById("btn").click();
                 }
             });
+            // Function that call flask API to send the user response to the chatbot and get the chatbot response in return
             function userMessage() {
                 let myphase = document.querySelector("#convophase");
                 let userInput = document.querySelector("#input");

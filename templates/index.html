@@ -8,6 +8,7 @@
 </head>
 
 <body id="htmlbody">
+    <!-- Chatbot interface showing chatbot replies on the left and users message on the right while getting user response from the bottom of the div -->
     <p id="title">Welcome To Chatbot Conversation!</p>
     <div id="container">
         <div id="message">
@@ -29,6 +30,7 @@
 
         </div>
     </div>
+    <!-- In Line Style For Chatbot Interface-->
     <style>
         body {
             text-align: center;
@@ -106,35 +108,18 @@
             color: white;
         }
       
-
-        @media only screen and (max-width: 850px) {
-            #container {
-                margin-left: 20%;
-                margin-right: 20%;
-            }
-        }
-
-        @media only screen and (max-width: 550px) {
-            #input {
-                width: 80%;
-            }
-        }
-
-        @media only screen and (max-width: 360px) {
-            #input {
-                width: 73%;
-            }
-        }
     </style>
     <script>
+        // Checking whether enter is pressed while getting response from the user and if yes then call user message function by activating
+        // on click function on element with btn id 
         input.addEventListener("keypress", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
                 document.getElementById("btn").click();
             }
         });
+        // Function that call flask API to send the user response to the chatbot and get the chatbot response in return
         function userMessage() {
-            let myphase = document.querySelector("#convophase");
             let userInput = document.querySelector("#input");
             let message = document.querySelector("#message");
             let mymessage = document.querySelector("#mymessage");

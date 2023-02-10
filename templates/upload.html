@@ -8,6 +8,7 @@
     </head>
 
     <body>
+        <!-- Choosing the paper and submitting it to the flask api for building the rules -->
         <div id="myform">
             <label id="uploadfile" widht="200px">
                 <input id="Files" name="file" type="file" accept=".pdf, .docx"/>
@@ -18,6 +19,7 @@
             <br>
             <input id="submitfile" type="submit" value="Submit" onclick="UploadFile()">
         </div>
+        <!-- Inner Style -->
         <style>
             input[type="file"] {
                 display: none;
@@ -64,6 +66,7 @@
             }
         </style>
         <script>
+            // Function caling flask api when click on the submit button and file is send in the API to flask
             $(function () {
                 $('#submitfile').click(function () {
                     const formData = new FormData();

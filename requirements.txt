@@ -9,3 +9,6 @@ pattern
 nltk
 pandas
 pycountry
+sci-kit
+scikit-learn
+numpy
