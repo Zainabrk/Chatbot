@@ -11,15 +11,19 @@
         <br>
         <br>
         <!-- Choosing the paper and submitting it to the flask api for building the rules -->
+
         <div id="myform">
+            <h4 id="sub"></h4>
             <label id="uploadfile" widht="200px">
-                <input id="Files" name="file" type="file" accept=".pdf, .docx"/>
+                <input id="Files" name="file" type="file" onchange="Submitpaper()" accept=".pdf, .docx"/>
                 Chose Paper
             </label>
             <br>
             <br>
             <br>
             <input id="submitfile" type="submit" value="Submit" onclick="UploadFile()">
+            <h4 id="paper">Choose paper for chatbot</h4>
+
         </div>
         <!-- Chatbot interface showing chatbot replies on the left and users message on the right while getting user response from the bottom of the div -->
         <div id="container">
@@ -46,6 +50,52 @@
         <button id="chatbot" style="position:fixed;right:1%;bottom:1%;" onclick="Chatbot()">Chatbot</button>
         <!-- In Line Styles For Web Page -->
         <style>
+            .spinner {
+                animation: rotate 2s linear infinite;
+                z-index: 2;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -25px 0 0 -25px;
+                width: 50px;
+                height: 50px;
+            }
+            .path {
+                animation: rotate 2s linear infinite;
+                z-index: 2;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -25px 0 0 -25px;
+                width: 50px;
+                height: 50px;
+                stroke: hsl(210, 70, 75);
+                stroke-linecap: round;
+                animation: dash 1.5s ease-in-out infinite;
+            }
+
+
+            @keyframes rotate {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes dash {
+                0% {
+                    stroke-dasharray: 1, 150;
+                    stroke-dashoffset: 0;
+                }
+                50% {
+                    stroke-dasharray: 90, 150;
+                    stroke-dashoffset: -35;
+                }
+                100% {
+                    stroke-dasharray: 90, 150;
+                    stroke-dashoffset: -124;
+                }
+            }
+
             #h12 {
                 font-size: medium;
                 padding: 10px;
@@ -54,7 +104,6 @@
                 border-radius: 10px;
                 float: right;
             }
-
             #mymessage {
                 padding: 10px;
                 width: 100%;
@@ -157,9 +206,16 @@
             }
         </style>
         <script>
+            function Submitpaper() {
+                var paper = document.getElementById('paper');
+                paper.innerHTML = "Submit the selected paper"
+
+            }
             // Function caling flask api when click on the submit button and file is send in the API to flask
             $(function () {
                 $('#submitfile').click(function () {
+                    var sub = document.getElementById('sub');
+                    sub.innerHTML = "&#x2705; Your paper is submitted wait for some seconds to chat..."
                     const formData = new FormData();
                     formData.append("file", document.getElementById('Files').files[0]);
                     $.ajax({
@@ -172,6 +228,10 @@
                         success: function (data) {
                             var ins = document.getElementById('container');
                             ins.style.visibility = "visible"
+                            var sub = document.getElementById('sub');
+                            sub.innerHTML = ""
+                            var paper = document.getElementById('paper');
+                            paper.innerHTML = ""
                         }
                     });
                 });
@@ -190,7 +250,7 @@
 
             }
             // Checking whether enter is pressed while getting response from the user and if yes then call user message function by activating
-            // on click function on element with btn id 
+            // on click function on element with btn id
             input.addEventListener("keypress", function (event) {
                 if (event.key === "Enter") {
                     event.preventDefault();

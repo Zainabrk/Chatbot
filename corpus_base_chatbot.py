@@ -244,16 +244,6 @@ def problem(text):
       future = future + text[idx2]
       idx2+=1
     return future
-  elif ("introduction" in text):
-    idx1 = text.index("introduction")
-    idx2 = idx1+1000
-    future=''
-    for idx in range(idx1+len("introduction")+1, idx2):
-      future = future + text[idx]
-    while(idx2<len(text) and text[idx2]!='.' ):
-      future = future + text[idx2]
-      idx2+=1
-    return summary(future)
   else:
     problem = abstract(text)
     return summary(problem)
@@ -273,16 +263,6 @@ def problemdiscuss(text):
       future = future + text[idx2]
       idx2+=1
     return future
-  elif ("conclusion" in text):
-    idx1 = text.index("conclusion")
-    idx2 = idx1+1000
-    future=''
-    for idx in range(idx1+len("conclusion")+1, idx2):
-      future = future + text[idx]
-    while(idx2<len(text) and text[idx2]!='.' ):
-      future = future + text[idx2]
-      idx2+=1
-    return summary(future)
   else:
     problem = abstract(text)
     return summary(problem)
